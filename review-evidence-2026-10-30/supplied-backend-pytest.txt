@@ -1,0 +1,17 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.16, pytest-9.1.1, pluggy-1.7.0
+rootdir: C:\LearningManagementSystem\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collected 59 items
+
+backend\tests\integration\database\test_postgres_database.py ........... [ 18%]
+.........                                                                [ 33%]
+backend\tests\integration\test_health_api.py .......                     [ 45%]
+backend\tests\integration\test_programs_api.py ..........                [ 62%]
+backend\tests\unit\programs\test_application_use_cases.py ..........     [ 79%]
+backend\tests\unit\programs\test_domain.py ......                        [ 89%]
+backend\tests\unit\test_config.py .....                                  [ 98%]
+backend\tests\unit\test_database_probe.py .                              [100%]
+
+============================= 59 passed in 7.03s ==============================

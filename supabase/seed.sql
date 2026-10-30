@@ -1,0 +1,2 @@
+-- Reserved for reference and synthetic development data after schema design.
+-- No schema or learner records are created by this scaffold.

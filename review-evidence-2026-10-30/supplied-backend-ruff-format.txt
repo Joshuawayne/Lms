@@ -1,0 +1,341 @@
+== ruff format ==
+unformatted: File would be reformatted
+  --> backend\app\main.py:13:1
+   |
+12 | app = create_app()
+   -
+   |
+
+unformatted: File would be reformatted
+   --> backend\app\modules\programs\application\ports.py:105:39
+    |
+104 |
+    -     async def find_by_idempotency_key(
+    -         self, key: uuid.UUID
+    -     ) -> ApplicationReplayRecord | None:
+105 +     async def find_by_idempotency_key(self, key: uuid.UUID) -> ApplicationReplayRecord | None:
+106 |         """Look up an existing application by its client-supplied idempotency key.
+--------------------------------------------------------------------------------
+111 |
+    -     async def insert_application(
+    -         self, submission: ApplicationSubmission
+    -     ) -> SubmissionResult:
+112 +     async def insert_application(self, submission: ApplicationSubmission) -> SubmissionResult:
+113 |         """Insert a new application and its 'submitted' audit event atomically.
+    |
+
+unformatted: File would be reformatted
+   --> backend\app\modules\programs\infrastructure\in_memory.py:35:53
+   |
+34 |     def __init__(self, programs: list[Program] | None = None) -> None:
+   -         self._programs: dict[uuid.UUID, Program] = {
+   -             p.id: p for p in (programs or [])
+   -         }
+35 +         self._programs: dict[uuid.UUID, Program] = {p.id: p for p in (programs or [])}
+36 |
+--------------------------------------------------------------------------------
+49 |             for p in self._programs.values()
+   -             if p.status == ProgramStatus.PUBLISHED
+   -             and (pathway is None or p.pathway == pathway)
+50 +             if p.status == ProgramStatus.PUBLISHED and (pathway is None or p.pathway == pathway)
+51 |         ]
+--------------------------------------------------------------------------------
+92 |
+   -     async def find_by_idempotency_key(
+   -         self, key: uuid.UUID
+   -     ) -> ApplicationReplayRecord | None:
+93 +     async def find_by_idempotency_key(self, key: uuid.UUID) -> ApplicationReplayRecord | None:
+94 |         return self._records_by_key.get(key)
+95 |
+   -     async def insert_application(
+   -         self, submission: ApplicationSubmission
+   -     ) -> SubmissionResult:
+96 +     async def insert_application(self, submission: ApplicationSubmission) -> SubmissionResult:
+97 |         if submission.idempotency_key in self._records_by_key:
+   |
+
+unformatted: File would be reformatted
+  --> backend\app\modules\programs\infrastructure\postgres.py:54:60
+   |
+53 | _RECEIPT_COLUMNS = (
+   -     "id, idempotency_key, request_fingerprint, program_id, "
+   -     "status, submitted_at, reference"
+54 +     "id, idempotency_key, request_fingerprint, program_id, status, submitted_at, reference"
+55 | )
+   |
+
+unformatted: File would be reformatted
+   --> backend\tests\integration\database\test_postgres_database.py:70:30
+    |
+69  |
+    - async def _scoped_references(
+    -     conn: psycopg.AsyncConnection[Any], key: object | None
+    - ) -> list[str]:
+70  + async def _scoped_references(conn: psycopg.AsyncConnection[Any], key: object | None) -> list[str]:
+71  |     """Read receipt references as lms_api, inside a transaction scoped to ``key``."""
+--------------------------------------------------------------------------------
+162 |             async with conn.transaction():
+    -                 await conn.execute(
+    -                     "SELECT set_config('lms.request_key', %s, true)", (str(key),)
+    -                 )
+163 +                 await conn.execute("SELECT set_config('lms.request_key', %s, true)", (str(key),))
+164 |                 with pytest.raises(InsufficientPrivilege) as caught:
+--------------------------------------------------------------------------------
+189 |
+    -     assert ledger.scalar(
+    -         "SELECT status::text FROM lms.enrolment_applications WHERE reference = %s",
+    -         ("APP-TEST-MUTATE",),
+    -     ) == "submitted"
+190 +     assert (
+191 +         ledger.scalar(
+192 +             "SELECT status::text FROM lms.enrolment_applications WHERE reference = %s",
+193 +             ("APP-TEST-MUTATE",),
+194 +         )
+195 +         == "submitted"
+196 +     )
+197 |
+--------------------------------------------------------------------------------
+215 |             )
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.enrolment_applications WHERE program_id = %s", (program_id,)
+    -     ) == 0
+216 +     assert (
+217 +         ledger.scalar(
+218 +             "SELECT count(*) FROM lms.enrolment_applications WHERE program_id = %s", (program_id,)
+219 +         )
+220 +         == 0
+221 +     )
+222 |
+--------------------------------------------------------------------------------
+247 |
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+    -         (application_id,),
+    -     ) == 1  # only the fixture's own submitted event
+248 +     assert (
+249 +         ledger.scalar(
+250 +             "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+251 +             (application_id,),
+252 +         )
+253 +         == 1
+254 +     )  # only the fixture's own submitted event
+255 |
+--------------------------------------------------------------------------------
+276 |     assert "row-level security" in message
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.enrolment_applications WHERE program_id = %s", (program_id,)
+    -     ) == 0
+277 +     assert (
+278 +         ledger.scalar(
+279 +             "SELECT count(*) FROM lms.enrolment_applications WHERE program_id = %s", (program_id,)
+280 +         )
+281 +         == 0
+282 +     )
+283 |
+--------------------------------------------------------------------------------
+294 |         await repo.insert_application(closed_submission)
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.enrolment_applications WHERE program_id = %s", (program_id,)
+    -     ) == 0
+295 +     assert (
+296 +         ledger.scalar(
+297 +             "SELECT count(*) FROM lms.enrolment_applications WHERE program_id = %s", (program_id,)
+298 +         )
+299 +         == 0
+300 +     )
+301 |
+--------------------------------------------------------------------------------
+317 |     # Independent connection: the confirmation we received is backed by committed rows.
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.enrolment_applications WHERE idempotency_key = %s",
+    -         (submission.idempotency_key,),
+    -     ) == 1
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+    -         (result.record.id,),
+    -     ) == 1
+318 +     assert (
+319 +         ledger.scalar(
+320 +             "SELECT count(*) FROM lms.enrolment_applications WHERE idempotency_key = %s",
+321 +             (submission.idempotency_key,),
+322 +         )
+323 +         == 1
+324 +     )
+325 +     assert (
+326 +         ledger.scalar(
+327 +             "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+328 +             (result.record.id,),
+329 +         )
+330 +         == 1
+331 +     )
+332 |
+333 |     replay = await repo.insert_application(submission)
+334 |     assert replay.is_new is False
+335 |     assert replay.record.id == result.record.id
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+    -         (result.record.id,),
+    -     ) == 1
+336 +     assert (
+337 +         ledger.scalar(
+338 +             "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+339 +             (result.record.id,),
+340 +         )
+341 +         == 1
+342 +     )
+343 |
+--------------------------------------------------------------------------------
+407 |     assert results[0].record.id == results[1].record.id
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.enrolment_applications WHERE idempotency_key = %s",
+    -         (submission.idempotency_key,),
+    -     ) == 1
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+    -         (results[0].record.id,),
+    -     ) == 1
+408 +     assert (
+409 +         ledger.scalar(
+410 +             "SELECT count(*) FROM lms.enrolment_applications WHERE idempotency_key = %s",
+411 +             (submission.idempotency_key,),
+412 +         )
+413 +         == 1
+414 +     )
+415 +     assert (
+416 +         ledger.scalar(
+417 +             "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+418 +             (results[0].record.id,),
+419 +         )
+420 +         == 1
+421 +     )
+422 |
+--------------------------------------------------------------------------------
+472 |     # Independent connection: neither record committed.
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.enrolment_applications WHERE idempotency_key = %s",
+    -         (submission.idempotency_key,),
+    -     ) == 0
+    -     assert ledger.scalar(
+    -         "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+    -         (repo.application_id,),
+    -     ) == 0
+473 +     assert (
+474 +         ledger.scalar(
+475 +             "SELECT count(*) FROM lms.enrolment_applications WHERE idempotency_key = %s",
+476 +             (submission.idempotency_key,),
+477 +         )
+478 +         == 0
+479 +     )
+480 +     assert (
+481 +         ledger.scalar(
+482 +             "SELECT count(*) FROM lms.application_audit_events WHERE application_id = %s",
+483 +             (repo.application_id,),
+484 +         )
+485 +         == 0
+486 +     )
+    |
+
+unformatted: File would be reformatted
+   --> backend\tests\support\database_target.py:126:39
+    |
+125 |             ).fetchone()
+    -             has_schema = conn.execute(
+    -                 "SELECT to_regclass('lms.programs') IS NOT NULL"
+    -             ).fetchone()
+126 +             has_schema = conn.execute("SELECT to_regclass('lms.programs') IS NOT NULL").fetchone()
+127 |     except psycopg.Error as error:
+    |
+
+unformatted: File would be reformatted
+   --> scripts\db_tools.py:70:26
+    |
+69  |     if not url:
+    -         raise SystemExit("LMS_MIGRATION_DATABASE_URL is not configured in backend/.env.")
+70  +         raise SystemExit(
+71  +             "LMS_MIGRATION_DATABASE_URL is not configured in backend/.env."
+72  +         )
+73  |     return url
+--------------------------------------------------------------------------------
+97  |     if target is None:
+    -         raise SystemExit("LMS_TEST_DATABASE_URL / LMS_TEST_MAINTENANCE_DATABASE_URL not set.")
+98  +         raise SystemExit(
+99  +             "LMS_TEST_DATABASE_URL / LMS_TEST_MAINTENANCE_DATABASE_URL not set."
+100 +         )
+101 |     return target
+--------------------------------------------------------------------------------
+105 |     target = _test_target()
+    -     print(f"Recreating isolated test database {target.database!r} on {target.host}:{target.port}")
+    -     with psycopg.connect(target.maintenance_url_for("postgres"), autocommit=True) as admin:
+106 +     print(
+107 +         f"Recreating isolated test database {target.database!r} on {target.host}:{target.port}"
+108 +     )
+109 +     with psycopg.connect(
+110 +         target.maintenance_url_for("postgres"), autocommit=True
+111 +     ) as admin:
+112 |         admin.execute(
+--------------------------------------------------------------------------------
+129 |         )
+    -     with psycopg.connect(target.maintenance_url_for(target.database), autocommit=True) as conn:
+130 +     with psycopg.connect(
+131 +         target.maintenance_url_for(target.database), autocommit=True
+132 +     ) as conn:
+133 |         for migration in _migration_files():
+--------------------------------------------------------------------------------
+140 |     target = _test_target()
+    -     with psycopg.connect(target.maintenance_url_for("postgres"), autocommit=True) as admin:
+141 +     with psycopg.connect(
+142 +         target.maintenance_url_for("postgres"), autocommit=True
+143 +     ) as admin:
+144 |         admin.execute(
+--------------------------------------------------------------------------------
+156 |         refs = app_refs.get(program["id"], [])
+    -         recognised = bool(TEST_SLUG.fullmatch(program["slug"])) and program["title"] in TEST_TITLES
+157 +         recognised = (
+158 +             bool(TEST_SLUG.fullmatch(program["slug"]))
+159 +             and program["title"] in TEST_TITLES
+160 +         )
+161 |         synthetic_content = (
+--------------------------------------------------------------------------------
+181 |     app_refs: dict = {}  # type: ignore[type-arg]
+    -     for row in conn.execute("SELECT program_id, reference FROM lms.enrolment_applications"):
+182 +     for row in conn.execute(
+183 +         "SELECT program_id, reference FROM lms.enrolment_applications"
+184 +     ):
+185 |         app_refs.setdefault(row["program_id"], []).append(row["reference"])
+--------------------------------------------------------------------------------
+193 |         rows = _load_programs(conn)
+    -         audit = conn.execute("SELECT count(*) AS n FROM lms.application_audit_events").fetchone()
+194 +         audit = conn.execute(
+195 +             "SELECT count(*) AS n FROM lms.application_audit_events"
+196 +         ).fetchone()
+197 |     published = sum(1 for r in rows if r["status"] == "published")
+198 |     print(f"Programs: {len(rows)} total, {published} published")
+    -     print(f"Applications: {sum(r['applications'] for r in rows)}; audit events: {audit['n']}\n")
+199 +     print(
+200 +         f"Applications: {sum(r['applications'] for r in rows)}; audit events: {audit['n']}\n"
+201 +     )
+202 |     by_owner: dict[str, int] = {}
+--------------------------------------------------------------------------------
+207 |     if args.list:
+    -         print("\n| created | status | apps | owner | slug |\n| --- | --- | --- | --- | --- |")
+208 +         print(
+209 +             "\n| created | status | apps | owner | slug |\n| --- | --- | --- | --- | --- |"
+210 +         )
+211 |         for row in rows:
+--------------------------------------------------------------------------------
+246 |         )
+    -         conn.execute("DELETE FROM lms.enrolment_applications WHERE program_id = ANY(%s)", (ids,))
+247 +         conn.execute(
+248 +             "DELETE FROM lms.enrolment_applications WHERE program_id = ANY(%s)", (ids,)
+249 +         )
+250 |         deleted = conn.execute("DELETE FROM lms.programs WHERE id = ANY(%s)", (ids,))
+--------------------------------------------------------------------------------
+270 |     inventory_parser = commands.add_parser("inventory")
+    -     inventory_parser.add_argument("--list", action="store_true", help="list every program")
+271 +     inventory_parser.add_argument(
+272 +         "--list", action="store_true", help="list every program"
+273 +     )
+274 |     inventory_parser.set_defaults(handler=cmd_inventory)
+    |
+
+7 files would be reformatted, 140 files already formatted

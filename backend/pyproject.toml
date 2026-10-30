@@ -1,0 +1,200 @@
+[project]
+name = "jjenga-lms-backend"
+version = "0.1.0"
+description = "FastAPI foundation for the Jjenga Code learning management system"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+  "fastapi>=0.162,<0.163",
+  "uvicorn[standard]>=0.40,<1",
+  "pydantic-settings>=2.10,<3",
+  "psycopg[binary]>=3.2,<4",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8,<10",
+  "ruff>=0.11,<1",
+  "mypy>=1.16,<2",
+  "import-linter>=2,<3",
+  "httpx2>=2.16.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["app"]
+
+[tool.importlinter]
+root_package = "app"
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "Domain modules stay independent of HTTP and database adapters"
+type = "forbidden"
+source_modules = [
+  "app.modules.identity.domain",
+  "app.modules.people.domain",
+  "app.modules.programs.domain",
+  "app.modules.content.domain",
+  "app.modules.activities.domain",
+  "app.modules.attendance.domain",
+  "app.modules.submissions.domain",
+  "app.modules.assessments.domain",
+  "app.modules.portfolios.domain",
+  "app.modules.guidance.domain",
+  "app.modules.reports.domain",
+  "app.modules.imports.domain",
+  "app.modules.media.domain",
+  "app.modules.live_classes.domain",
+  "app.modules.notifications.domain",
+  "app.modules.certificates.domain",
+  "app.modules.audit.domain",
+  "app.shared.domain",
+]
+forbidden_modules = [
+  "fastapi",
+  "psycopg",
+  "httpx2",
+  "uvicorn",
+  "app.api",
+  "app.infrastructure",
+  "app.config",
+  "app.bootstrap",
+  "app.modules.identity.application",
+  "app.modules.identity.api",
+  "app.modules.identity.infrastructure",
+  "app.modules.people.application",
+  "app.modules.people.api",
+  "app.modules.people.infrastructure",
+  "app.modules.programs.application",
+  "app.modules.programs.api",
+  "app.modules.programs.infrastructure",
+  "app.modules.content.application",
+  "app.modules.content.api",
+  "app.modules.content.infrastructure",
+  "app.modules.activities.application",
+  "app.modules.activities.api",
+  "app.modules.activities.infrastructure",
+  "app.modules.attendance.application",
+  "app.modules.attendance.api",
+  "app.modules.attendance.infrastructure",
+  "app.modules.submissions.application",
+  "app.modules.submissions.api",
+  "app.modules.submissions.infrastructure",
+  "app.modules.assessments.application",
+  "app.modules.assessments.api",
+  "app.modules.assessments.infrastructure",
+  "app.modules.portfolios.application",
+  "app.modules.portfolios.api",
+  "app.modules.portfolios.infrastructure",
+  "app.modules.guidance.application",
+  "app.modules.guidance.api",
+  "app.modules.guidance.infrastructure",
+  "app.modules.reports.application",
+  "app.modules.reports.api",
+  "app.modules.reports.infrastructure",
+  "app.modules.imports.application",
+  "app.modules.imports.api",
+  "app.modules.imports.infrastructure",
+  "app.modules.media.application",
+  "app.modules.media.api",
+  "app.modules.media.infrastructure",
+  "app.modules.live_classes.application",
+  "app.modules.live_classes.api",
+  "app.modules.live_classes.infrastructure",
+  "app.modules.notifications.application",
+  "app.modules.notifications.api",
+  "app.modules.notifications.infrastructure",
+  "app.modules.certificates.application",
+  "app.modules.certificates.api",
+  "app.modules.certificates.infrastructure",
+  "app.modules.audit.application",
+  "app.modules.audit.api",
+  "app.modules.audit.infrastructure",
+]
+
+[[tool.importlinter.contracts]]
+name = "Application use cases depend on ports rather than concrete adapters"
+type = "forbidden"
+source_modules = [
+  "app.modules.identity.application",
+  "app.modules.people.application",
+  "app.modules.programs.application",
+  "app.modules.content.application",
+  "app.modules.activities.application",
+  "app.modules.attendance.application",
+  "app.modules.submissions.application",
+  "app.modules.assessments.application",
+  "app.modules.portfolios.application",
+  "app.modules.guidance.application",
+  "app.modules.reports.application",
+  "app.modules.imports.application",
+  "app.modules.media.application",
+  "app.modules.live_classes.application",
+  "app.modules.notifications.application",
+  "app.modules.certificates.application",
+  "app.modules.audit.application",
+  "app.shared.application",
+]
+forbidden_modules = [
+  "fastapi",
+  "psycopg",
+  "httpx2",
+  "uvicorn",
+  "app.api",
+  "app.infrastructure",
+  "app.config",
+  "app.modules.identity.api",
+  "app.modules.identity.infrastructure",
+  "app.modules.people.api",
+  "app.modules.people.infrastructure",
+  "app.modules.programs.api",
+  "app.modules.programs.infrastructure",
+  "app.modules.content.api",
+  "app.modules.content.infrastructure",
+  "app.modules.activities.api",
+  "app.modules.activities.infrastructure",
+  "app.modules.attendance.api",
+  "app.modules.attendance.infrastructure",
+  "app.modules.submissions.api",
+  "app.modules.submissions.infrastructure",
+  "app.modules.assessments.api",
+  "app.modules.assessments.infrastructure",
+  "app.modules.portfolios.api",
+  "app.modules.portfolios.infrastructure",
+  "app.modules.guidance.api",
+  "app.modules.guidance.infrastructure",
+  "app.modules.reports.api",
+  "app.modules.reports.infrastructure",
+  "app.modules.imports.api",
+  "app.modules.imports.infrastructure",
+  "app.modules.media.api",
+  "app.modules.media.infrastructure",
+  "app.modules.live_classes.api",
+  "app.modules.live_classes.infrastructure",
+  "app.modules.notifications.api",
+  "app.modules.notifications.infrastructure",
+  "app.modules.certificates.api",
+  "app.modules.certificates.infrastructure",
+  "app.modules.audit.api",
+  "app.modules.audit.infrastructure",
+]

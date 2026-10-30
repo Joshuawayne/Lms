@@ -1,0 +1,111 @@
+/*
+ * Jjenga Code — design tokens
+ *
+ * Two layers, kept deliberately distinct:
+ *
+ *   1. BASE BRAND COLOURS — the six exact poster colours. Never altered.
+ *        navy #160D35 · purple #8C2ACA · yellow #F9C41D · pink #F6479A
+ *        muted rose #9F555E · white #FFFFFF
+ *      They are exposed as --color-brand-* and ALSO sit at one fixed step of each
+ *      supporting scale (navy-900, purple-500, yellow-400, pink-500, rose-500), so
+ *      the ordinary Tailwind utilities (bg-purple-500, text-navy-900 …) and the
+ *      Nuxt UI primary/neutral roles render the real brand colour.
+ *
+ *   2. SUPPORTING SHADES — tints and shades generated around each base hue for
+ *      accessible text, hover states, soft surfaces and borders. They are design
+ *      tokens, not new brand colours. Contrast notes (WCAG 2.x, computed):
+ *        white on purple-500 6.4:1   navy-900 on yellow-400 11.3:1
+ *        navy-900 on pink-500 5.5:1  white on pink-500 3.3:1 (large text only)
+ *        white on pink-600  4.8:1    rose-500 on white 5.3:1
+ *        yellow-400/white/pink-300 on navy-900 are the readable pairings on navy;
+ *        purple-500 text on navy-900 is only 2.9:1 and must not be used for text.
+ *
+ * Typography: Sora (headings) and DM Sans (body), self-hosted via @fontsource.
+ */
+
+@theme {
+  /* ── fonts ─────────────────────────────────────────────────────────── */
+  --font-heading: 'Sora Variable', 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans Variable', 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* ── base brand colours (exact poster values) ──────────────────────── */
+  --color-brand-navy: #160d35;
+  --color-brand-purple: #8c2aca;
+  --color-brand-yellow: #f9c41d;
+  --color-brand-pink: #f6479a;
+  --color-brand-rose: #9f555e;
+  --color-brand-white: #ffffff;
+
+  /* ── supporting scales (base colour marked ◆) ──────────────────────── */
+  --color-navy-50: #f5f3fa;
+  --color-navy-100: #e8e4f2;
+  --color-navy-200: #d3cde6;
+  --color-navy-300: #b3aad3;
+  --color-navy-400: #8d81bc;
+  --color-navy-500: #6a5ba3;
+  --color-navy-600: #4d3c8a;
+  --color-navy-700: #36256f;
+  --color-navy-800: #241752;
+  --color-navy-900: #160d35; /* ◆ navy */
+  --color-navy-950: #0d0722;
+
+  --color-purple-50: #f8f0fc;
+  --color-purple-100: #eeddf9;
+  --color-purple-200: #ddbdf2;
+  --color-purple-300: #c48be8;
+  --color-purple-400: #a857da;
+  --color-purple-500: #8c2aca; /* ◆ purple */
+  --color-purple-600: #7620ac;
+  --color-purple-700: #5f1a8c;
+  --color-purple-800: #49156a;
+  --color-purple-900: #350f4e;
+  --color-purple-950: #200933;
+
+  --color-yellow-50: #fff9e3;
+  --color-yellow-100: #fef1c1;
+  --color-yellow-200: #fce48a;
+  --color-yellow-300: #fbd652;
+  --color-yellow-400: #f9c41d; /* ◆ yellow */
+  --color-yellow-500: #e0ab06;
+  --color-yellow-600: #b38700;
+  --color-yellow-700: #7f6000;
+  --color-yellow-800: #4d3a00;
+  --color-yellow-900: #2a2000;
+  --color-yellow-950: #181200;
+
+  --color-pink-50: #fef1f7;
+  --color-pink-100: #fde2ee;
+  --color-pink-200: #fcc4dd;
+  --color-pink-300: #fa9bc8;
+  --color-pink-400: #f871b1;
+  --color-pink-500: #f6479a; /* ◆ pink */
+  --color-pink-600: #d02c7d;
+  --color-pink-700: #a31f62;
+  --color-pink-800: #741547;
+  --color-pink-900: #480c2c;
+  --color-pink-950: #2a0719;
+
+  --color-rose-50: #f9f3f3;
+  --color-rose-100: #f1e4e5;
+  --color-rose-200: #e3c9cc;
+  --color-rose-300: #cfa1a7;
+  --color-rose-400: #b87780;
+  --color-rose-500: #9f555e; /* ◆ muted rose */
+  --color-rose-600: #84444c;
+  --color-rose-700: #683540;
+  --color-rose-800: #4c262c;
+  --color-rose-900: #2d161a;
+  --color-rose-950: #1a0d10;
+
+  /* ── type scale ────────────────────────────────────────────────────── */
+  --text-display: clamp(2.75rem, 1.6rem + 5.4vw, 5.75rem);
+
+  /* ── spacing ───────────────────────────────────────────────────────── */
+  --spacing-section: clamp(4rem, 3rem + 4vw, 8rem);
+
+  /* ── radii ─────────────────────────────────────────────────────────── */
+  --radius-blob: 40% 60% 55% 45% / 55% 40% 60% 45%;
+
+  /* ── motion ────────────────────────────────────────────────────────── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -1,0 +1,195 @@
+/*
+ * Jjenga Code — global stylesheet
+ *
+ * Imports the self-hosted fonts, Tailwind, Nuxt UI and the design tokens, then defines
+ * base typography, focus treatment, the shared control classes (.jc-btn …), texture
+ * utilities and the reduced-motion rules for the whole public website.
+ *
+ * AOS styles are deliberately NOT imported here: plugins/aos.client.ts injects them only
+ * after AOS has initialised, so content is never hidden when enhancement fails.
+ */
+@import "@fontsource-variable/sora";
+@import "@fontsource-variable/dm-sans";
+@import "tailwindcss";
+@import "@nuxt/ui";
+@import "./tokens.css";
+
+/* ── base ────────────────────────────────────────────────────────────── */
+html {
+  scroll-padding-top: 6rem; /* native anchor jumps clear the sticky header */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* vue-router honours scroll-margin-top (not scroll-padding) for hash targets */
+:where(section, div, article, footer, h2)[id] { scroll-margin-top: 6rem; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--color-navy-900);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip; /* decorative overlap never creates a sideways scrollbar */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--color-navy-900);
+}
+
+:where(a) { text-underline-offset: 0.2em; }
+
+/* One visible focus treatment for every interactive element */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-purple-500);
+  outline-offset: 3px;
+  border-radius: 0.375rem;
+}
+.on-dark :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible,
+.on-dark:where(a, button):focus-visible {
+  outline-color: var(--color-yellow-400);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-yellow-400);
+  color: var(--color-navy-900);
+  font-weight: 700;
+  border: 2px solid var(--color-navy-900);
+  border-radius: 0.75rem;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ── controls (links and buttons share one retro "pressed block" language) ── */
+.jc-btn {
+  --jc-edge: var(--color-navy-900);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  color: var(--color-navy-900);
+  background: #fff;
+  border: 2px solid var(--jc-edge);
+  border-radius: 0.875rem;
+  box-shadow: 4px 4px 0 var(--jc-edge);
+  cursor: pointer;
+  transition: transform 150ms var(--ease-out-expo), box-shadow 150ms var(--ease-out-expo),
+    background-color 150ms;
+}
+.jc-btn:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--jc-edge); }
+.jc-btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--jc-edge); }
+.jc-btn:disabled, .jc-btn[aria-disabled="true"] {
+  opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: 2px 2px 0 var(--jc-edge);
+}
+.jc-btn-primary { background: var(--color-yellow-400); }
+.jc-btn-primary:hover { background: var(--color-yellow-300); }
+.jc-btn-purple { background: var(--color-purple-500); color: #fff; }
+.jc-btn-purple:hover { background: var(--color-purple-600); }
+.jc-btn-secondary { background: #fff; }
+.jc-btn-secondary:hover { background: var(--color-pink-50); }
+.jc-btn-sm { min-height: 2.5rem; padding: 0.45rem 1rem; font-size: 0.85rem; box-shadow: 3px 3px 0 var(--jc-edge); }
+.jc-btn-block { display: flex; width: 100%; }
+/* On navy surfaces the edge flips to white/pink so the block still reads */
+.on-dark .jc-btn, .jc-btn.on-dark { --jc-edge: #fff; }
+.on-dark .jc-btn-primary, .jc-btn-primary.on-dark { box-shadow: 4px 4px 0 var(--color-pink-500); border-color: var(--color-navy-900); }
+.on-dark .jc-btn-secondary { background: transparent; color: #fff; }
+.on-dark .jc-btn-secondary:hover { background: rgb(255 255 255 / 0.1); }
+
+/* Small pixel-label (Game Boy-era detail, used sparingly) */
+.jc-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-navy-900);
+  background: var(--color-yellow-400);
+  border: 2px solid var(--color-navy-900);
+  border-radius: 0.375rem;
+}
+.jc-label-pink { background: var(--color-pink-500); }
+.jc-label-white { background: #fff; }
+
+/* Form controls */
+.jc-input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 0.9rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--color-navy-900);
+  background: #fff;
+  border: 2px solid var(--color-navy-300);
+  border-radius: 0.75rem;
+}
+.jc-input:hover { border-color: var(--color-navy-500); }
+.jc-input[aria-invalid="true"] { border-color: var(--color-pink-600); background: var(--color-pink-50); }
+.jc-input:disabled { background: var(--color-navy-50); color: var(--color-navy-600); }
+
+/* ── texture and geometry ────────────────────────────────────────────── */
+.poster-pattern {
+  background-color: #fff;
+  background-image: url('/brand/jenga-pixel-pattern.svg');
+  background-repeat: repeat;
+  background-size: 640px 320px;
+}
+.pixel-grid-navy {
+  background-color: var(--color-navy-900);
+  background-image: linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.brand-logo { display: block; width: clamp(10.5rem, 17vw, 15rem); max-width: 100%; height: auto; }
+.shape-float { position: absolute; pointer-events: none; z-index: 0; }
+.section-gap { padding-block: var(--spacing-section); }
+.prose-narrow { max-width: 38rem; }
+
+/* Giant outlined letterforms that echo the poster's oversized background type */
+.ghost-type {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-navy-900);
+  opacity: 0.07;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── Lenis (smooth scroll) ───────────────────────────────────────────── */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ── reduced motion ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}

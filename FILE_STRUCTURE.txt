@@ -1,0 +1,531 @@
+C:\LearningManagementSystem\
+├── .vscode\
+│   ├── extensions.json
+│   ├── launch.json
+│   ├── settings.json
+│   └── tasks.json
+├── backend\
+│   ├── app\
+│   │   ├── api\
+│   │   │   ├── middleware\
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── exception_handler.py
+│   │   │   │   └── request_context.py
+│   │   │   ├── v1\
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── health.py
+│   │   │   │   └── router.py
+│   │   │   ├── __init__.py
+│   │   │   ├── dependencies.py
+│   │   │   └── problem_details.py
+│   │   ├── infrastructure\
+│   │   │   ├── authentication\
+│   │   │   │   └── __init__.py
+│   │   │   ├── code_execution\
+│   │   │   │   └── __init__.py
+│   │   │   ├── database\
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── connection.py
+│   │   │   ├── file_storage\
+│   │   │   │   └── __init__.py
+│   │   │   ├── idempotency\
+│   │   │   │   └── __init__.py
+│   │   │   ├── integrations\
+│   │   │   │   ├── bigbluebutton\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── gotenberg\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── spreadsheets\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── job_delivery\
+│   │   │   │   └── __init__.py
+│   │   │   ├── observability\
+│   │   │   │   └── __init__.py
+│   │   │   └── __init__.py
+│   │   ├── jobs\
+│   │   │   ├── handlers\
+│   │   │   │   └── __init__.py
+│   │   │   └── __init__.py
+│   │   ├── modules\
+│   │   │   ├── activities\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── assessments\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   ├── commands\
+│   │   │   │   │   │   └── __init__.py
+│   │   │   │   │   ├── queries\
+│   │   │   │   │   │   └── __init__.py
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── attendance\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── audit\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── certificates\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   ├── templates\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── content\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── guidance\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── identity\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── imports\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── live_classes\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── media\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── notifications\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── people\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── portfolios\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── programs\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── reports\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   ├── templates\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── submissions\
+│   │   │   │   ├── api\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── application\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── domain\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── infrastructure\
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── __init__.py
+│   │   │   └── __init__.py
+│   │   ├── shared\
+│   │   │   ├── application\
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── database_probe.py
+│   │   │   ├── domain\
+│   │   │   │   └── __init__.py
+│   │   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   ├── bootstrap.py
+│   │   ├── config.py
+│   │   └── main.py
+│   ├── tests\
+│   │   ├── contracts\
+│   │   │   ├── activities\
+│   │   │   └── api\
+│   │   ├── fixtures\
+│   │   ├── integration\
+│   │   │   ├── database\
+│   │   │   ├── integrations\
+│   │   │   ├── jobs\
+│   │   │   ├── workflows\
+│   │   │   └── test_health_api.py
+│   │   ├── security\
+│   │   │   ├── authentication\
+│   │   │   ├── authorization\
+│   │   │   ├── data_visibility\
+│   │   │   └── uploads\
+│   │   ├── unit\
+│   │   │   ├── activities\
+│   │   │   ├── assessments\
+│   │   │   ├── attendance\
+│   │   │   ├── audit\
+│   │   │   ├── certificates\
+│   │   │   ├── content\
+│   │   │   ├── guidance\
+│   │   │   ├── identity\
+│   │   │   ├── imports\
+│   │   │   ├── live_classes\
+│   │   │   ├── media\
+│   │   │   ├── notifications\
+│   │   │   ├── people\
+│   │   │   ├── portfolios\
+│   │   │   ├── programs\
+│   │   │   ├── reports\
+│   │   │   ├── submissions\
+│   │   │   ├── test_config.py
+│   │   │   └── test_database_probe.py
+│   │   └── conftest.py
+│   ├── .env.example
+│   ├── .python-version
+│   ├── pyproject.toml
+│   ├── README.md
+│   └── uv.lock
+├── contracts\
+│   ├── activities\
+│   │   └── v1\
+│   │       └── blocks\
+│   ├── api\
+│   │   └── v1\
+│   │       └── openapi.json
+│   ├── examples\
+│   │   ├── activities\
+│   │   └── api\
+│   └── README.md
+├── docs\
+│   ├── api\
+│   │   └── conventions.md
+│   ├── architecture\
+│   │   ├── decisions\
+│   │   │   ├── 0001-patched-esbuild.md
+│   │   │   └── 0002-typescript-compatibility.md
+│   │   └── system-overview.md
+│   ├── database\
+│   ├── engineering\
+│   │   ├── code-and-comment-standards.md
+│   │   ├── definition-of-done.md
+│   │   └── solid-and-dependencies.md
+│   ├── guides\
+│   ├── operations\
+│   ├── product\
+│   │   ├── assessment-model.md
+│   │   ├── growth-design.md
+│   │   ├── requirements.md
+│   │   ├── system-algorithm.md
+│   │   └── teacher-workload.md
+│   ├── security\
+│   │   └── access-matrix.md
+│   └── testing\
+│       ├── setup-verification.md
+│       └── strategy.md
+├── frontend\
+│   ├── app\
+│   │   ├── api\
+│   │   │   ├── generated\
+│   │   │   │   └── types.ts
+│   │   │   └── errors.ts
+│   │   ├── assets\
+│   │   │   ├── images\
+│   │   │   └── styles\
+│   │   │       ├── main.css
+│   │   │       └── tokens.css
+│   │   ├── components\
+│   │   │   ├── data-display\
+│   │   │   ├── feedback\
+│   │   │   ├── forms\
+│   │   │   ├── navigation\
+│   │   │   └── ui\
+│   │   ├── composables\
+│   │   │   └── useApi.ts
+│   │   ├── features\
+│   │   │   ├── activities\
+│   │   │   │   ├── blocks\
+│   │   │   │   │   ├── code\
+│   │   │   │   │   ├── decision\
+│   │   │   │   │   ├── instruction\
+│   │   │   │   │   ├── project\
+│   │   │   │   │   ├── question\
+│   │   │   │   │   ├── reflection\
+│   │   │   │   │   ├── resource\
+│   │   │   │   │   └── video\
+│   │   │   │   ├── builder\
+│   │   │   │   │   ├── components\
+│   │   │   │   │   └── composables\
+│   │   │   │   ├── components\
+│   │   │   │   ├── composables\
+│   │   │   │   └── player\
+│   │   │   │       ├── components\
+│   │   │   │       └── composables\
+│   │   │   ├── assessments\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── attendance\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── audit\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── certificates\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── content\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── guidance\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── identity\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── imports\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── live-classes\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── notifications\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── people\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── portfolios\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── programs\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── progress\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   ├── reports\
+│   │   │   │   ├── components\
+│   │   │   │   └── composables\
+│   │   │   └── submissions\
+│   │   │       ├── components\
+│   │   │       └── composables\
+│   │   ├── layouts\
+│   │   │   └── default.vue
+│   │   ├── middleware\
+│   │   ├── pages\
+│   │   │   ├── admin\
+│   │   │   │   ├── access-management\
+│   │   │   │   ├── assessments\
+│   │   │   │   ├── audit\
+│   │   │   │   ├── certificates\
+│   │   │   │   ├── classes\
+│   │   │   │   ├── content\
+│   │   │   │   ├── guardians\
+│   │   │   │   ├── imports\
+│   │   │   │   ├── learners\
+│   │   │   │   ├── programs\
+│   │   │   │   ├── reports\
+│   │   │   │   ├── schedules\
+│   │   │   │   ├── settings\
+│   │   │   │   └── teachers\
+│   │   │   ├── learner\
+│   │   │   │   ├── activities\
+│   │   │   │   ├── certificates\
+│   │   │   │   ├── feedback\
+│   │   │   │   ├── goals\
+│   │   │   │   ├── lessons\
+│   │   │   │   ├── live-classes\
+│   │   │   │   ├── portfolio\
+│   │   │   │   ├── programs\
+│   │   │   │   ├── progress\
+│   │   │   │   ├── projects\
+│   │   │   │   └── submissions\
+│   │   │   ├── parent\
+│   │   │   │   └── children\
+│   │   │   │       └── [learnerId]\
+│   │   │   │           ├── attendance\
+│   │   │   │           ├── goals\
+│   │   │   │           ├── portfolio\
+│   │   │   │           ├── projects\
+│   │   │   │           └── reports\
+│   │   │   ├── programs\
+│   │   │   ├── teacher\
+│   │   │   │   ├── activities\
+│   │   │   │   │   └── [activityId]\
+│   │   │   │   ├── assessments\
+│   │   │   │   ├── assignments\
+│   │   │   │   ├── attendance\
+│   │   │   │   ├── classes\
+│   │   │   │   ├── content\
+│   │   │   │   ├── learners\
+│   │   │   │   ├── live-classes\
+│   │   │   │   ├── observations\
+│   │   │   │   ├── reflection\
+│   │   │   │   ├── reports\
+│   │   │   │   └── submissions\
+│   │   │   └── index.vue
+│   │   ├── plugins\
+│   │   │   └── api.ts
+│   │   ├── stores\
+│   │   │   └── preferences.ts
+│   │   ├── types\
+│   │   ├── utils\
+│   │   └── app.vue
+│   ├── public\
+│   │   ├── branding\
+│   │   └── images\
+│   ├── tests\
+│   │   ├── components\
+│   │   ├── fixtures\
+│   │   ├── nuxt\
+│   │   └── unit\
+│   │       ├── composables\
+│   │       ├── features\
+│   │       ├── stores\
+│   │       ├── utils\
+│   │       └── api-errors.test.ts
+│   ├── .env.example
+│   ├── eslint.config.mjs
+│   ├── nuxt.config.ts
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   ├── tsconfig.json
+│   └── vitest.config.ts
+├── infrastructure\
+│   ├── containers\
+│   ├── deployment\
+│   ├── development\
+│   ├── integrations\
+│   │   ├── bigbluebutton\
+│   │   └── gotenberg\
+│   └── observability\
+├── scripts\
+│   ├── check.ps1
+│   ├── export_openapi.py
+│   ├── generate-api-types.mjs
+│   ├── setup-backend.ps1
+│   ├── setup-frontend.ps1
+│   └── verify-contracts.mjs
+├── supabase\
+│   ├── migrations\
+│   ├── tests\
+│   ├── README.md
+│   └── seed.sql
+├── tests\
+│   ├── accessibility\
+│   ├── e2e\
+│   │   ├── admin\
+│   │   ├── authentication\
+│   │   ├── cross-portal\
+│   │   ├── learner\
+│   │   ├── parent\
+│   │   ├── public\
+│   │   │   └── development-connection.spec.ts
+│   │   └── teacher\
+│   ├── fixtures\
+│   ├── performance\
+│   └── resilience\
+├── .editorconfig
+├── .gitattributes
+├── .gitignore
+├── .node-version
+├── CONTRIBUTING.md
+├── FILE_STRUCTURE.txt
+├── package-lock.json
+├── package.json
+├── playwright.config.ts
+├── README.md
+└── SECURITY.md

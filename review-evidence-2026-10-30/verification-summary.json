@@ -1,0 +1,55 @@
+{
+  "backend_tests": {
+    "passed": 39,
+    "skipped_native_database": 20,
+    "native_database_rerun": false
+  },
+  "supplied_windows_native_evidence": "backend-pytest.txt records 59 passed; independently decoded and inspected, not rerun against that database",
+  "frontend_existing_tests": {
+    "passed": 19,
+    "suites": 4
+  },
+  "independent_frontend_regressions": {
+    "failed": 6,
+    "test_type": "actual SFC/store with fixture data and Nuxt/UI stubs; not a full browser test"
+  },
+  "frontend_typecheck": {
+    "exit_code": 2,
+    "errors": 7
+  },
+  "frontend_lint": {
+    "exit_code": 1,
+    "errors": 2
+  },
+  "backend_mypy": {
+    "passed": true,
+    "source_files": 131
+  },
+  "backend_helper_lint": {
+    "exit_code": 1,
+    "errors": 2
+  },
+  "backend_helper_format": {
+    "exit_code": 1,
+    "files_needing_formatting": 3
+  },
+  "architecture": {
+    "kept": 2,
+    "broken": 0
+  },
+  "contracts": {
+    "passed": true
+  },
+  "production_build": {
+    "passed": true
+  },
+  "production_homepage_http": {
+    "check": "production_homepage_http",
+    "status": 500,
+    "bodyBytes": 14132
+  },
+  "scoped_rls": "PGlite probes passed; no native concurrency/hosted Supabase verification",
+  "native_postgresql_server_available": false,
+  "hosted_supabase_verified": false,
+  "browser_viewports_verified": false
+}
